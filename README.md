@@ -7,7 +7,7 @@ The objective is to revise writing Reducers.
 
 For the TodoList Application:
 
-1. Create a new trello app using the command `create-react-app todo --typescript`
+1. Create a new todo app using the command `create-react-app todo --typescript`
 1. Write a TodoApp reducer, which supports the following operations within a board:
   1. Add Item
   1. Edit Item
