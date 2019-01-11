@@ -7,7 +7,9 @@ interface ListsProps{
     addCardToList: any,
     editCardName: any,
     editListName: any,
-    addListToBoard: any
+    addListToBoard: any,
+    moveCard:any,
+    moveList: any
 }
 interface ListsState{
     lists: ListData[],
@@ -52,7 +54,7 @@ class Lists  extends Component<ListsProps, ListsState> {
             <div className="boardLists">
                 {
                 this.state.lists.map( (list, index) => {
-                        return  <List key={index} list={list} addCardToList={this.props.addCardToList} editListName={this.props.editListName} editCardName={this.props.editCardName}></List>
+                        return  <List key={index} list={list} moveList={this.props.moveList} moveCard={this.props.moveCard} addCardToList={this.props.addCardToList} editListName={this.props.editListName} editCardName={this.props.editCardName}></List>
                     })
                 }      
             </div>

@@ -8,7 +8,9 @@ interface ListContainerProps{
     addCardToList: any,
     onAddList: any,
     onlistNameEdited: any,
-    editCardName: any
+    editCardName: any,
+    moveCard: any,
+    moveList: any
 }
 
 interface ListContainerState{
@@ -31,7 +33,7 @@ class ListContainer  extends Component<ListContainerProps, ListContainerState> {
                 <span id="linkBoards" onClick={this.props.showBoards}>Back to boards</span>
             </section>
             <section id={this.state.board.id} className="listSection">
-                <Lists lists={this.state.board.lists} addCardToList={this.props.addCardToList} addListToBoard={this.props.onAddList} editListName={this.props.onlistNameEdited} editCardName={this.props.editCardName}></Lists> 
+                <Lists lists={this.state.board.lists} addCardToList={this.props.addCardToList} moveList={this.props.moveList} addListToBoard={this.props.onAddList} editListName={this.props.onlistNameEdited} editCardName={this.props.editCardName} moveCard={this.props.moveCard}></Lists> 
             </section>
     </section>
       );

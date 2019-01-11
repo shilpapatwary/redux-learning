@@ -6,7 +6,9 @@ interface ListProps{
     list: ListData,
     editCardName: any,
     editListName: any,
-    addCardToList: any
+    addCardToList: any,
+    moveCard: any,
+    moveList: any
 }
 
 interface ListState{
@@ -28,6 +30,8 @@ class List  extends Component<ListProps, ListState> {
         this.editListName = this.editListName.bind(this);
         this.setListName = this.setListName.bind(this);
         this.editCardName = this.editCardName.bind(this);
+        this.moveCard = this.moveCard.bind(this);
+        this.moveList = this.moveList.bind(this);
     }
 
     addCardToList(event: any) {
@@ -51,13 +55,22 @@ class List  extends Component<ListProps, ListState> {
         this.props.editCardName(this.state.list.id, cid, name);
     }
 
+    moveCard(cardId: string,index: number) {
+        this.props.moveCard(this.state.listId, cardId, index);
+    }
+
+    moveList() {
+        this.props.moveList(this.state.listId, this.state.list.index);
+    }
     render() {
       return (
         <div id={this.state.listId} className="list">
-                                    <div className="listTitle"><input type='text' value={this.state.listName} onChange={this.setListName} onKeyDown={this.editListName}/></div>
+                                    <div className="listHeader"><input  className="listTitle" type='text' value={this.state.listName} onChange={this.setListName} onKeyDown={this.editListName}/>
+                                    <span className="moveList" onClick={this.moveList}>&#8594;</span>
+                                    </div>
                                     <div className="cards">{
                                         this.state.cards ? this.state.cards.map( (card) => {
-                                            return <Card card={card} key={card.id} editCardName={this.editCardName}></Card>
+                                            return <Card card={card} key={card.id} moveCard={this.moveCard} editCardName={this.editCardName}></Card>
                                         }) : <h2>loading...</h2>
                                     }</div>
                                     <div className="addCard" onClick={this.addCardToList}>+ Add card</div>

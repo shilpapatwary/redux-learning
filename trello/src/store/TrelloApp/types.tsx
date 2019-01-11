@@ -13,12 +13,14 @@ export enum TrelloActionTypes {
 }
 export interface CardData {
         id?: string,
-        name?: string
+        name?: string,
+        index?: number
 }
 export interface ListData {
         id?: string,
         name?: string,
-        cards: CardData[]
+        cards: CardData[],
+        index: number
 }
 export interface BoardData {
         id: string,
@@ -29,5 +31,7 @@ export interface BoardData {
 
 export interface BoardState{
     boards?: BoardData[],
-    selectedBoard?: BoardData
+    selectedBoard?: BoardData,
+    showBoards?: boolean,
+    showLists?: boolean
 }

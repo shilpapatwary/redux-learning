@@ -6,9 +6,11 @@
             "lists": [{
                 "id": "560bf446f17023a3710658fb",
                 "name": "Alaska",
+                "index":1,
                 "cards":[{
                     "id": "560bf4dd7139286471dc009c",
-                    "name": "Grand Canyon National Park"
+                    "name": "Grand Canyon National Park",
+                    "index": 1
                   }]
               }]
         },
@@ -33,9 +35,8 @@
             "lists": []
         }
     ],
-    "currentBoard": {
-        "id":"5bdaeff0bee9dc6b70afe7u0",
-        "name":"board1",
-        "lists": []
-    }
+    "selectedBoard": {
+    },
+    "showBoards" : true,
+    "showLists" : false
 }

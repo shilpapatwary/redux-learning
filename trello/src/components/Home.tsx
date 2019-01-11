@@ -6,13 +6,15 @@ import store from '..';
 
 interface BoardProps{
   boards?: BoardData[],
-  selectedBoard?: BoardData
+  selectedBoard?: BoardData,
+  showBoards? : boolean,
+  showLists? : boolean
 }
 
 interface HomeState{ 
     boards?: BoardData[],
     selectedBoard?: BoardData,
-    showBoards: boolean,
+    showBoards?: boolean,
     showLists?: boolean,
     showSuccess: boolean
 }
@@ -23,8 +25,8 @@ class Home  extends Component<BoardProps, HomeState> {
     this.state = {
       boards: props.boards,
       selectedBoard: props.selectedBoard,
-      showBoards: true,
-      showLists: false,
+      showBoards: props.showBoards ,
+      showLists: props.showLists ,
       showSuccess: false
     };
     this.setSelectedBoard = this.setSelectedBoard.bind(this);
@@ -34,18 +36,24 @@ class Home  extends Component<BoardProps, HomeState> {
     this.addCardToList = this.addCardToList.bind(this);
     this.editListName = this.editListName.bind(this);
     this.editCardName = this.editCardName.bind(this);
+    this.createBoard = this.createBoard.bind(this);
+    this.removeBoard  = this.removeBoard.bind(this);
+    this.moveCard = this.moveCard.bind(this);
+    this.moveList = this.moveList.bind(this);
   }
   
   setSelectedBoard(board: BoardData) {
+    this.setState({showBoards: false,
+      showLists: true,});
     store.dispatch({type:'SET_BOARD', payload:{board}});
   }
 
-  updateBoard(name: string) {
-    store.dispatch({type:'EDIT_BOARD', payload:{name}});
+  updateBoard(id: string, name: string) {
+    store.dispatch({type:'EDIT_BOARD', payload:{id, name}});
   }
 
   addListToBoard(list: ListData) {
-    store.dispatch({type:'ADD_CARD', payload:{list}});
+    store.dispatch({type:'ADD_LIST', payload:{list}});
   }
 
   addCardToList(listId:string, card: CardData) {
@@ -53,8 +61,7 @@ class Home  extends Component<BoardProps, HomeState> {
   }
 
   showBoards() {
-    this.setState({ showBoards: true,
-      showLists: false});
+   store.dispatch({type:'SET_CURRENT_VIEW', payload:{showBoards: true, showLists: false}});
   }
 
   editListName(listId: String, listName: String) {
@@ -65,18 +72,38 @@ class Home  extends Component<BoardProps, HomeState> {
     store.dispatch({type: 'EDIT_CARD', payload:{listId, cardId, name}});
   }
 
+  moveCard(listId: string, cardId: string, index: number) {
+    store.dispatch({type: 'MOVE_CARD', payload:{listId, cardId, index}});
+  }
+
+  moveList(listId: string, index: number) {
+    store.dispatch({type: 'MOVE_LIST', payload:{listId, index}});
+  }
+  createBoard() {
+    const board = {
+     id:Math.random() * 10000000,
+     name:"New Board",
+      "lists": []
+    }
+    store.dispatch({type:'CREATE_BOARD', payload: {board}});
+  }
+
+  removeBoard(boardId: string) {
+    store.dispatch({type:'REMOVE_BOARD', payload: {boardId}});
+  }
+
     render() {
       return (
         <div className="rootContainer">
           <header>
             <section><h2>Trello</h2></section>
-            <section className="addboard"><span className="info">Create a Board</span><span id="createBoardIcon">+</span></section>
+            <section className="addboard"><span className="info">Create a Board</span><span id="createBoardIcon" onClick={this.createBoard}>+</span></section>
           </header>
           <section id="content">
             { this.state.showBoards && this.state.boards? <BoardContainer boards={this.state.boards} setSelectedBoard={this.setSelectedBoard} 
-            showSuccess={this.state.showSuccess} updateBoard={this.updateBoard}>
+            showSuccess={this.state.showSuccess} updateBoard={this.updateBoard} removeBoard={this.removeBoard}>
             </BoardContainer> : null}
-            { this.state.showLists && this.state.selectedBoard? <ListContainer board={this.state.selectedBoard} onAddList = {this.addListToBoard} showBoards={this.showBoards} addCardToList={this.addCardToList} onlistNameEdited={this.editListName} editCardName={this.editCardName}></ListContainer> : null }
+            { this.state.showLists && this.state.selectedBoard? <ListContainer moveList={this.moveList} moveCard= {this.moveCard} board={this.state.selectedBoard} onAddList = {this.addListToBoard} showBoards={this.showBoards} addCardToList={this.addCardToList} onlistNameEdited={this.editListName} editCardName={this.editCardName}></ListContainer> : null }
           </section>
         </div>
       );

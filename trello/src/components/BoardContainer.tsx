@@ -6,7 +6,8 @@ interface BoardContainerProps{
     boards: BoardData[],
     setSelectedBoard: any,
     updateBoard: any,
-    showSuccess: any
+    showSuccess: any,
+    removeBoard: any
 }
 
 class BoardContainer  extends Component<BoardContainerProps, BoardState> {
@@ -15,18 +16,7 @@ class BoardContainer  extends Component<BoardContainerProps, BoardState> {
         this.state = {
             boards: props.boards
         }
-        this.setSelectedBoard = this.setSelectedBoard.bind(this);
-        this.updateSelectedBoard = this.updateSelectedBoard.bind(this);
     }
-
-    setSelectedBoard(board: BoardData){
-        this.props.setSelectedBoard(board);
-    }
-
-    updateSelectedBoard(board: BoardData) {
-        this.props.updateBoard(board);
-    }
-    
     render() {
       return this.state.boards ? (
         <section id="boards">
@@ -34,7 +24,7 @@ class BoardContainer  extends Component<BoardContainerProps, BoardState> {
             {
             this.state.boards.map(board => {
                 return <Board board={board} key={board.id} 
-                showSuccess={this.props.showSuccess} onBoardSelect={this.setSelectedBoard} onBoardUpdate={this.updateSelectedBoard}/>
+                showSuccess={this.props.showSuccess} onBoardSelect={this.props.setSelectedBoard} onBoardUpdate={this.props.updateBoard} removeBoard={this.props.removeBoard}/>
             })
             }  
             </ul>
