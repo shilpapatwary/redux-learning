@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Home from './components/Home';
+import TodoApplicationReducer from './store/TodoApp/reducer'; 
+import initialState from './initialState.json';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {createStore} from 'redux';
+const store = createStore(TodoApplicationReducer, initialState);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+store.subscribe( () => {
+    const newState = store.getState();
+    ReactDOM.render(<Home key={Math.random()} items={store.getState().items} currentItem={store.getState().currentItem}/>, document.getElementById('root'));
+  })
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<Home key={Math.random()} items={store.getState().items} currentItem={store.getState().currentItem}/>, document.getElementById('root'));
+
+export default store;

@@ -1,0 +1,22 @@
+{
+    "items": [
+        {
+            "id": "12345",
+            "name": "item1",
+            "isComplete": false,
+            "index": 1
+        },
+        {
+            "id": "12365",
+            "name": "item2",
+            "isComplete": false,
+            "index": 2
+        }
+    ],
+    "currentItem": {
+        "id": "12345",
+        "name": "item1",
+        "isComplete": false,
+        "index": 0
+    }
+}
