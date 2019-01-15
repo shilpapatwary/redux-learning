@@ -1,0 +1,269 @@
+body, h2{
+    margin:0;
+}
+header {
+  height:50px;
+  background-color: gray;
+  color:#ffffff;
+  text-align:center;
+  justify-content:space-between;
+  line-height:50px;
+}
+#workspaceHeader{
+    background-color: gray;
+}
+header section{
+    margin-left:10px;
+}
+.addWorkspace{
+    cursor: pointer;
+     font-weight: bold;
+     font-size:60px;
+     margin-right:40px;
+ }
+ .info{
+    display: none;
+    color:#ffffff;
+    font-size:15px;
+}
+#workspaceHeader{
+    cursor:pointer;
+}
+.hidden{
+    display:none;
+}
+#workspaceContainer{
+    width: 75%;
+    padding: 0;
+    margin-left: 14%;
+}
+#workspaceContainer li{
+    list-style: none;
+    border-bottom:1px solid gray;
+    padding:2%;
+    background-color: #3267a4;
+}
+.workspace{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+    height: 64px;
+    line-height: 64px;
+    background-color: #3367a4;
+}
+.deleteWorkspace{
+    cursor: pointer;
+}
+#workspaces input, #workspaces textarea{
+    border:0;
+    width:100%;
+}
+input:focus,textarea:focus{
+outline: none;
+}
+
+.workspaceTitle{
+color: #ffffff;
+    background-color: #3267a4;
+    width: 85%;
+}
+.updateWorkspace{
+    flex-grow:1;
+}
+.success{
+    background-color: #8bc34a;
+}
+#workspaceContainer .success{
+    background-color: #8bc34a;
+}
+#addWorkspace{
+    cursor: pointer;
+}
+.workspace i{
+    color: #5ebdd4;
+    font-size:18px;
+    margin:2% 2% 0 0;
+    cursor:pointer;
+}
+.workspace i:hover{
+    color: #00fff5;
+}
+#channelSectionContainer{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+#channelParentContainer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column; 
+}
+#channelParentContainer .addchannel{
+    cursor: pointer;
+     font-weight: bold;
+     font-size:60px;
+     margin-right:40px;
+ }
+ #channelParentContainer ul{
+     margin:0;
+     padding:0;
+ }
+ #channelParentContainer li{
+     width:400px;
+     height:50px;
+     list-style: none;
+     border-bottom:1px solid #000000;
+ }
+ #channelParentContainer .info{
+     display: none;
+     color:#ffffff;
+     font-size:15px;
+ }
+ #channelParentContainer #addchannelsIcon:hover .info{
+     display:block;
+ }
+ #channelParentContainer .channelHeader{
+     display: flex;
+     justify-content: space-between;
+     padding:0 10px 0 10px;
+     height:100%;
+     cursor:pointer;
+     color: #5c8687;
+ }
+ 
+ #channelParentContainer .mainSection{
+     display:flex;
+     flex:3;
+ }
+ #channelParentContainer .channelsContainer{
+     display:flex;
+     flex-direction:column;
+     height:100%;
+ }
+ #channelParentContainer .channelsSection{
+     border-right:1px solid black;
+ }
+ 
+ #channelParentContainer  .messageSection{
+     flex-grow: 3;
+ }
+ 
+ #channelParentContainer .updatechannel{
+ width:15%;
+ height:20px;
+ float:right;
+ cursor:pointer;
+ border:1px solid #cccccc;
+ background-color: gray;
+ color:#ffffff;
+ text-align: center;
+ margin-right:5px;
+ }
+ #channelParentContainer .channelTitle{
+ flex-grow: 2;
+ line-height:50px;
+ }
+ #channelParentContainer .messageInput{
+     width:100%;
+ }
+ 
+ #channelParentContainer .messageContainer{
+     padding:2%;
+     overflow: auto;
+     width:100%;
+     height:76%;
+ }
+ #channelParentContainer .inputContainer{
+    width:99.6%;
+    height:19%;
+ }
+ #channelParentContainer .messageInput{
+     height:90px;
+ }
+ 
+ #channelParentContainer .channelMessages form{
+     position: relative;
+ }
+ #channelParentContainer  .submitMessage{
+     width: 10%;
+     right: 0%;
+     bottom: 0%;
+     height: 95px;
+     position: absolute;
+ }
+ #channelParentContainer  .channelMessages{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:91%;
+ }
+
+ #addUserForm, #addChannelForm{
+    width: 20%;
+    margin: 5%;
+    height: 100px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid grey;
+}
+ .close-form{
+     cursor: pointer;
+     padding:2%;
+     float:right;
+ }
+
+ #addChannelForm form, #addUserForm form {
+     clear:both;
+ }
+
+ #channelParentContainer .hidden{
+     display:none;
+ }
+
+ .channelHeader i{
+    line-height: 50px;
+    margin-right:3%;
+ }
+ .channelHeader input{
+    margin: 3% 5% 3% 0;
+ }
+ .userListDialog {
+    position: absolute;
+    top: 20%;
+    right: 2%;
+    border: 2px solid black;
+    padding: 1%;
+    background-color: wheat;
+    width: 24%;
+    height: auto;
+ }
+
+ .closeUserDialog{
+     float:right;
+     cursor: pointer;
+ }
+
+ .backButton{
+    cursor: pointer;
+    margin:0;
+    padding-left:10px;
+}
+.backButton i{
+    margin-right:10px;
+}
+
+.channelHeaderName{
+    margin-left:10px;
+}
+
+.channelHeaderSection{
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+    cursor:pointer;
+    background-color:#cccccc;
+}
+.workspaceUser{
+    line-height: 50px;
+    padding-left:11px;
+}

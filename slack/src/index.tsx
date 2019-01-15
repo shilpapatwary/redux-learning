@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import Home from './components/Home';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import initialState from './initialState.json';
+import SlackApplicationReducer from './store/SlackApp/reducer';
+import {createStore} from 'redux';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+export const store = createStore(SlackApplicationReducer, initialState);
+store.subscribe( () => {
+    ReactDOM.render(<Home key={Math.random()*12345} workspaces={store.getState().workspaces} currentWorkspace={store.getState().currentWorkspace} showChannels={store.getState().showChannels} showWorkspaces={store.getState().showWorkspaces} channelsList={store.getState().channelsList} currentChannel={store.getState().currentChannel} />, document.getElementById('root'));
+    
+});
+ReactDOM.render(<Home key={Math.random()*12345} workspaces={store.getState().workspaces} currentWorkspace={store.getState().currentWorkspace} showChannels={store.getState().showChannels} showWorkspaces={store.getState().showWorkspaces} channelsList={store.getState().channelsList} currentChannel={store.getState().currentChannel} />, document.getElementById('root'));
+
+export default store;
