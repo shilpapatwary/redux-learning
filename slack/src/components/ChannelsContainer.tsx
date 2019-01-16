@@ -10,7 +10,6 @@ interface ChannelContainerProps{
     users: UserData[],
     showWorkspaceContainer: any,
     onAddChannel: any,
-    onUserThreadStart: any,
     onMessageSent: any,
     currentChannel: ChannelData,
     setCurrentChannel: any
@@ -39,7 +38,6 @@ class channelsContainer extends Component <ChannelContainerProps, ChannelContain
      this.addChannelToWorkspace = this.addChannelToWorkspace.bind(this);
      this.openChannelForm = this.openChannelForm.bind(this);
      this.openUserForm = this.openUserForm.bind(this);
-     this.startUserThread = this.startUserThread.bind(this);
      this.closeForm = this.closeForm.bind(this);
  }
 
@@ -64,13 +62,6 @@ class channelsContainer extends Component <ChannelContainerProps, ChannelContain
  openUserForm() {
     this.setState({ showChannelForm: false,
         showMessageSection: false,showUserForm: true})
- }
-
- startUserThread(event: React.MouseEvent<HTMLInputElement, MouseEvent>){
-     event.preventDefault();
-     this.props.onUserThreadStart((document.getElementById('workspaceUsername') as HTMLInputElement).value);
-     this.setState({showChannelForm: false, showUserForm: false,
-        showMessageSection: true})
  }
 
  closeForm() {
@@ -130,7 +121,7 @@ class channelsContainer extends Component <ChannelContainerProps, ChannelContain
                     <span><i className="fa fa-window-close close-form" aria-hidden="true" onClick={this.closeForm}></i></span>
                     <form>
                         <input type="text" id="workspaceUsername" className="userInput" placeholder="User Name"/>
-                        <input type="submit" onClick={this.startUserThread}/>
+                        <input type="submit"/>
                     </form>
             </section>
             }

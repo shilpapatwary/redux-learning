@@ -1,15 +1,16 @@
 
 export enum TrelloActionTypes {
-    EDIT_BOARD = "@@types/EDIT_BOARD",
-    CREATE_BOARD = "@@types/CREATE_BOARD",
-    ADD_LIST = "@@types/ADD_LIST",
-    MOVE_LIST = "@@types/MOVE_LIST",
-    EDIT_LIST = "@@types/EDIT_LIST",
-    ADD_CARD = "@@types/ADD_CARD",
-    EDIT_CARD = "@@types/EDIT_CARD",
-    MOVE_CARD = "@@types/MOVE_CARD",
-    DELETE_BOARD = "@@types/DELETE_ITEM",
-    SET_BOARD = "@@types/SET_BOARD"
+    EDIT_BOARD = "@trelloTypes/EDIT_BOARD",
+    CREATE_BOARD = "@trelloTypes/CREATE_BOARD",
+    ADD_LIST = "@trelloTypes/ADD_LIST",
+    MOVE_LIST = "@trelloTypes/MOVE_LIST",
+    EDIT_LIST = "@trelloTypes/EDIT_LIST",
+    ADD_CARD = "@trelloTypes/ADD_CARD",
+    EDIT_CARD = "@trelloTypes/EDIT_CARD",
+    MOVE_CARD = "@trelloTypes/MOVE_CARD",
+    DELETE_BOARD = "@trelloTypes/DELETE_ITEM",
+    SET_BOARD = "@trelloTypes/SET_BOARD",
+    SET_CURRENT_VIEW = "@trelloTypes/SET_CURRENT_VIEW"
 }
 export interface CardData {
         id?: string,

@@ -22,10 +22,7 @@ constructor(props: MessageHistoryProps){
 }
 
 submitMessage(message: MessageData) {
-    const messages = this.state.messages;
-    messages.push(message);
-    this.setState({messages: messages});
-    this.props.saveMessages(this.state.channel.id, this.state.messages);
+    this.props.saveMessages(this.state.channel.id, message);
 }
 
   render() {

@@ -28,5 +28,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "chai": "^4.2.0"
+  }
 }

@@ -1,14 +1,14 @@
 import { action } from 'typesafe-actions';
-import { SlackActionTypes } from './types';
+import { SlackActionTypes, WorkspaceData, UserData, ChannelData, MessageData } from './types';
 
-export const createWorkspaceAction = ( board : {}) => action(SlackActionTypes.CREATE_WORKSPACE, board);
-export const editWorkspaceAction = (boardName: string, boardId:String) => action(SlackActionTypes.EDIT_WORKSPACE, {boardName, boardId});
-export const deleteWorkspaceAction = (boardId: String) => action(SlackActionTypes.DELETE_WORKSPACE, boardId);
-export const enterWorkspaceAction = (boardId: String) => action(SlackActionTypes.DELETE_WORKSPACE, boardId);
-export const addUserWorkspaceAction = (boardId: String) => action(SlackActionTypes.DELETE_WORKSPACE, boardId);
+export const createWorkspaceAction = ( workspace : WorkspaceData) => action(SlackActionTypes.CREATE_WORKSPACE, {workspace});
+export const editWorkspaceAction = (id: string, name:String) => action(SlackActionTypes.EDIT_WORKSPACE, {id, name});
+export const deleteWorkspaceAction = (wid: String) => action(SlackActionTypes.DELETE_WORKSPACE,{wid});
+export const enterWorkspaceAction = (workspace: WorkspaceData) => action(SlackActionTypes.DELETE_WORKSPACE,{workspace} );
+export const addUserWorkspaceAction = (wid: string, user: UserData) => action(SlackActionTypes.DELETE_WORKSPACE, {wid, user});
 
-export const addChannelAction = (listName: string, listId:String) => action(SlackActionTypes.ADD_CHANNEL, {listName, listId});
-export const addUserChannelAction = (listName: string, listId:String) => action(SlackActionTypes.ADD_USER_CHANNEL, {listName, listId});
-export const listUsersAction = (itemName: string, itemId:String) => action(SlackActionTypes.LIST_USERS, {itemName, itemId});
+export const addChannelAction = (channel: ChannelData) => action(SlackActionTypes.ADD_CHANNEL, {channel});
 
-export const submitMeessageAction = (cardName: string, cardId:String) => action(SlackActionTypes.ADD_USER_WORKSPACE, {cardName, cardId});
+export const submitMessageAction = (cid: string, message: string) => action(SlackActionTypes.SUBMIT_MESSAGE, {cid, message});
+export const showWorkspacesAction = () => action(SlackActionTypes.SHOW_WORKSPACES);
+export const setChannelAction = (channel: ChannelData) => action(SlackActionTypes.SET_CHANNEL, {channel});

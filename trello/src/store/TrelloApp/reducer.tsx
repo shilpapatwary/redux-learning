@@ -10,27 +10,27 @@ const initialState = {
 
 const TodoApplicationReducer = (currentState: BoardState = initialState, action: AnyAction) => {
     switch(action.type) {
-        case 'CREATE_BOARD':
+        case TrelloActionTypes.CREATE_BOARD:
            return addBoardReducer(currentState, action);
-        case 'REMOVE_BOARD':
+        case TrelloActionTypes.DELETE_BOARD:
             return removeBoardReducer(currentState, action);
-        case 'EDIT_BOARD':
+        case TrelloActionTypes.EDIT_BOARD:
            return editBoardReducer(currentState, action);
-        case 'ADD_LIST':
+        case TrelloActionTypes.ADD_LIST:
             return addListReducer(currentState, action);
-        case 'EDIT_LIST':
+        case TrelloActionTypes.EDIT_LIST:
             return editListReducer(currentState, action);
-        case 'MOVE_LIST':
+        case TrelloActionTypes.MOVE_LIST:
             return moveListReducer(currentState, action);
-        case 'ADD_CARD':
+        case TrelloActionTypes.ADD_CARD:
             return addCardReducer(currentState, action);
-        case 'EDIT_CARD':
+        case TrelloActionTypes.EDIT_CARD:
             return editCardReducer(currentState, action);
-        case 'MOVE_CARD':
+        case TrelloActionTypes.MOVE_CARD:
              return moveCardReducer(currentState, action);
-        case 'SET_BOARD' :
+        case TrelloActionTypes.SET_BOARD :
             return setBoardReducer(currentState, action);
-        case 'SET_CURRENT_VIEW' :
+        case TrelloActionTypes.SET_CURRENT_VIEW :
             return setCurrentViewReducer(currentState, action);
         default:
             return currentState;

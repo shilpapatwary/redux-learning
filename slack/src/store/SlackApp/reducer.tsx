@@ -1,7 +1,8 @@
 import { WorkspaceState, SlackActionTypes } from "./types";
 import { AnyAction } from 'redux';
+import { Reducer } from 'redux';
 
-const initialState = {
+const initialState: WorkspaceState = {
     workspaces: undefined,
     currentWorkspace: undefined,
     showWorkspaces: undefined,
@@ -10,29 +11,25 @@ const initialState = {
     showChannels: undefined
 }
 
-const SlackApplicationReducer = (currentState: WorkspaceState = initialState, action: AnyAction) => {
+const SlackApplicationReducer: Reducer<WorkspaceState> = (currentState: WorkspaceState = initialState, action: AnyAction) => {
     switch(action.type) {
-        case 'CREATE_WORKSPACE':
+        case SlackActionTypes.CREATE_WORKSPACE:
            return createWorkspaceReducer(currentState, action);
-        case 'DELETE_WORKSPACE':
+        case SlackActionTypes.DELETE_WORKSPACE:
              return removeWorksapceReducer(currentState, action);
-         case 'EDIT_WORKSPACE':
+         case SlackActionTypes.EDIT_WORKSPACE:
             return editWorkspaceReducer(currentState, action);
-        case 'ENTER_WORKSPACE':
+        case SlackActionTypes.ENTER_WORKSPACE:
             return enterWorkspaceReducer(currentState, action);
-         case 'ADD_USER_WORKSPACE':
+         case SlackActionTypes.ADD_USER_WORKSPACE:
              return addUserWorkspaceReducer(currentState, action);
-        case 'SHOW_WORKSPACES':
+        case SlackActionTypes.SHOW_WORKSPACES:
              return showWorkspaces(currentState, action);
-        case 'ADD_CHANNEL':
+        case SlackActionTypes.ADD_CHANNEL:
              return addChannelReducer(currentState, action);
-        case 'SET_CHANNEL':
+        case SlackActionTypes.SET_CHANNEL:
             return setChannelReducer(currentState, action);
-        // case 'ADD_USER_CHANNEL':
-        //     return addUserCHannelReducer(currentState, action);
-        // case 'LIST_USERS':
-        //     return listUsersReducer(currentState, action);
-         case 'SUBMIT_MESSAGE':
+         case SlackActionTypes.SUBMIT_MESSAGE:
               return submitMessageReducer(currentState, action);
         default:
             return currentState;
