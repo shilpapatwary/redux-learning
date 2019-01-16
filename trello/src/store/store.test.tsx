@@ -1,12 +1,22 @@
 import chai from 'chai';
 import store from '.';
-import {}
+import {addBoardAction, editBoardAction, moveCardAction, moveListAction} from './TrelloApp/actions';
 chai.should();
 describe('Trello Application store', function() {
-  describe('store.dispatch(editWorkspaceAction("updated workspace"))', function() {
-    it('should update workpace name', function() {
-      store.dispatch(editWorkspaceAction('123456','updated workspace'));
-      store.getState().currentWorkspace.should.have.property('name').and.equal('updated workspace');
+  describe('store.dispatch(addBoardAction(""))', function() {
+    it('should add a bboard ', function() {
+      store.getState().boards.should.be.of.length(5);
+      store.dispatch(addBoardAction({
+        id:"12345",
+        name:"new board",
+        lists: []
+    }));
+    store.getState().boards.should.not.be.empty;
+    store.getState().boards.should.be.of.length(6);
+    });
+    it('should edit board ', function() {
+      store.dispatch(editBoardAction("5bdaeff0bee9dc6b70afed0d","updated name"));
+    store.getState().selectedBoard.should.have.property('name').and.equal('updated name');
     });
   });
 });

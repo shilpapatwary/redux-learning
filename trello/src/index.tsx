@@ -10,7 +10,6 @@ const store = createStore(TrelloApplicationReducer, initialState);
 
 store.subscribe( () => {
     const newState = store.getState();
-console.log("new state==================================", newState);
     ReactDOM.render(<Home key={Math.random()*12345} boards={newState.boards} selectedBoard={newState.selectedBoard} showBoards={newState.showBoards} showLists={newState.showLists}/>, document.getElementById('root'));
   })
 ReactDOM.render(<Home key={Math.random()*12345}  boards={store.getState().boards} selectedBoard={store.getState().selectedBoard} showBoards={store.getState().showBoards} showLists={store.getState().showLists}/>, document.getElementById('root'));

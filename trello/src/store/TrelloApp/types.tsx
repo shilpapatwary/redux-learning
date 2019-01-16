@@ -25,8 +25,7 @@ export interface ListData {
 }
 export interface BoardData {
         id: string,
-        name: string,
-        successClass: string
+        name: string
         lists: ListData[] 
 }
 

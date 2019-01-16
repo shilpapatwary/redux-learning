@@ -1,14 +1,15 @@
 import { BoardState, TrelloActionTypes } from "./types";
 import { AnyAction } from 'redux';
+import { Reducer } from 'redux';
 
-const initialState = {
+const initialState: BoardState = {
     boards: undefined,
     selectedBoard: undefined,
     showBoards: undefined,
     showLists: undefined
 }
 
-const TodoApplicationReducer = (currentState: BoardState = initialState, action: AnyAction) => {
+const TodoApplicationReducer: Reducer<BoardState> = (currentState: BoardState = initialState, action: AnyAction) => {
     switch(action.type) {
         case TrelloActionTypes.CREATE_BOARD:
            return addBoardReducer(currentState, action);

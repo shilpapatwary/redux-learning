@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BoardContainer from './BoardContainer';
 import ListContainer from './ListContainer';
-import {BoardState, BoardData, CardData, ListData} from '../store/TrelloApp/types';
+import {BoardState, BoardData, CardData, ListData, TrelloActionTypes} from '../store/TrelloApp/types';
 import store from '..';
 
 interface BoardProps{
@@ -45,39 +45,39 @@ class Home  extends Component<BoardProps, HomeState> {
   setSelectedBoard(board: BoardData) {
     this.setState({showBoards: false,
       showLists: true,});
-    store.dispatch({type:'SET_BOARD', payload:{board}});
+    store.dispatch({type:TrelloActionTypes.SET_BOARD, payload:{board}});
   }
 
   updateBoard(id: string, name: string) {
-    store.dispatch({type:'EDIT_BOARD', payload:{id, name}});
+    store.dispatch({type:TrelloActionTypes.EDIT_BOARD, payload:{id, name}});
   }
 
   addListToBoard(list: ListData) {
-    store.dispatch({type:'ADD_LIST', payload:{list}});
+    store.dispatch({type:TrelloActionTypes.ADD_LIST, payload:{list}});
   }
 
   addCardToList(listId:string, card: CardData) {
-    store.dispatch({type:'ADD_CARD', payload:{listId, card}});
+    store.dispatch({type:TrelloActionTypes.ADD_CARD, payload:{listId, card}});
   }
 
   showBoards() {
-   store.dispatch({type:'SET_CURRENT_VIEW', payload:{showBoards: true, showLists: false}});
+   store.dispatch({type:TrelloActionTypes.SET_CURRENT_VIEW, payload:{showBoards: true, showLists: false}});
   }
 
   editListName(listId: String, listName: String) {
-    store.dispatch({type:'EDIT_LIST', payload:{listId, listName}});
+    store.dispatch({type:TrelloActionTypes.EDIT_LIST, payload:{listId, listName}});
   }
 
   editCardName(listId: String, cardId:String, name: String) {
-    store.dispatch({type: 'EDIT_CARD', payload:{listId, cardId, name}});
+    store.dispatch({type: TrelloActionTypes.EDIT_CARD, payload:{listId, cardId, name}});
   }
 
   moveCard(listId: string, cardId: string, index: number) {
-    store.dispatch({type: 'MOVE_CARD', payload:{listId, cardId, index}});
+    store.dispatch({type: TrelloActionTypes.MOVE_CARD, payload:{listId, cardId, index}});
   }
 
   moveList(listId: string, index: number) {
-    store.dispatch({type: 'MOVE_LIST', payload:{listId, index}});
+    store.dispatch({type:TrelloActionTypes.MOVE_LIST, payload:{listId, index}});
   }
   createBoard() {
     const board = {
@@ -85,11 +85,11 @@ class Home  extends Component<BoardProps, HomeState> {
      name:"New Board",
       "lists": []
     }
-    store.dispatch({type:'CREATE_BOARD', payload: {board}});
+    store.dispatch({type:TrelloActionTypes.CREATE_BOARD, payload: {board}});
   }
 
   removeBoard(boardId: string) {
-    store.dispatch({type:'REMOVE_BOARD', payload: {boardId}});
+    store.dispatch({type:TrelloActionTypes.DELETE_BOARD, payload: {boardId}});
   }
 
     render() {
