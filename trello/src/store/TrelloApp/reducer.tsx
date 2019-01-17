@@ -59,7 +59,7 @@ function addBoardReducer(currentState: BoardState , action: AnyAction) {
 function editBoardReducer(currentState: BoardState , action: AnyAction) {
     const oldBoards = currentState.boards || [];
     const oldBoard = oldBoards.filter(i => i.id === action.payload.id)[0];
-    const newBoard = Object.assign({}, oldBoard, {name: action.payload.name});
+    const newBoard = {...oldBoard, name: action.payload.name};
     const newBoards = oldBoards.map(i => i.id === action.payload.id ? newBoard : i);
     return Object.assign({}, currentState, {boards: newBoards, selectedBoard:newBoard});
 }

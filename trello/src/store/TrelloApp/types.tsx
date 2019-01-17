@@ -13,13 +13,13 @@ export enum TrelloActionTypes {
     SET_CURRENT_VIEW = "@trelloTypes/SET_CURRENT_VIEW"
 }
 export interface CardData {
-        id?: string,
-        name?: string,
-        index?: number
+        id: string,
+        name: string,
+        index: number
 }
 export interface ListData {
-        id?: string,
-        name?: string,
+        id: string,
+        name: string,
         cards: CardData[],
         index: number
 }

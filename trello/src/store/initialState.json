@@ -4,8 +4,23 @@
             "id":"5bdaeff0bee9dc6b70afed0d",
             "name":"board2",
             "lists": [{
-                "id": "560bf446f17023a3710658fb",
-                "name": "Alaska",
+                "id": "123456",
+                "name": "List1",
+                "index":1,
+                "cards":[{
+                    "id": "123",
+                    "name": "card1",
+                    "index": 1
+                  },
+                  {
+                    "id": "345",
+                    "name": "card2",
+                    "index": 1
+                  }]
+              },
+              {
+                "id": "234567",
+                "name": "List2",
                 "index":1,
                 "cards":[{
                     "id": "560bf4dd7139286471dc009c",
