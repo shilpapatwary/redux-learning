@@ -14,9 +14,14 @@ describe('Trello Application store', function() {
     store.getState().boards.should.not.be.empty;
     store.getState().boards.should.be.of.length(6);
     });
-    it('should edit board ', function() {
-      store.dispatch(editBoardAction("5bdaeff0bee9dc6b70afed0d","updated name"));
-    store.getState().selectedBoard.should.have.property('name').and.equal('updated name');
+  });
+
+  describe('store.dispatch(editBoardAction(""))', function() {
+    it('should edit board name', function() {
+      store.dispatch(editBoardAction("5bdaeff0bee9dc6b70afed0d", "new Board"));
+      console.log(store.getState().selectedBoard);
+      const selectedBoard =  store.getState().selectedBoard;
+    selectedBoard.should.have.property('name').and.equal('new Board');
     });
   });
 });
