@@ -51,7 +51,7 @@ function editMessageReducer(currentState: WorkspaceState, action: AnyAction) {
        
         const newWorkspace = Object.assign({}, oldWorkspace, {channels: newChannels});
         const newWorkspaces = currentState.workspaces.map(i => i.id === oldWorkspace.id ? newWorkspace : i);
-        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels});
+        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels, error:''});
    
     } else{
         return currentState;
@@ -67,7 +67,7 @@ function deleteMessageReducer(currentState: WorkspaceState, action: AnyAction) {
        
         const newWorkspace = Object.assign({}, oldWorkspace, {channels: newChannels});
         const newWorkspaces = currentState.workspaces.map(i => i.id === oldWorkspace.id ? newWorkspace : i);
-        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels});
+        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels, error:''});
    
     } else{
         return currentState;
@@ -75,37 +75,40 @@ function deleteMessageReducer(currentState: WorkspaceState, action: AnyAction) {
 }
 
 function setChannelReducer(currentState: WorkspaceState, action: AnyAction) {
-    return Object.assign({}, currentState, {currentChannel: action.payload.channel});
+    return Object.assign({}, currentState, {currentChannel: action.payload.channel, error:''});
 }
 function enterWorkspaceReducer(currentState: WorkspaceState, action: AnyAction) {
     return Object.assign({}, currentState, {workspaces: currentState.workspaces, currentWorkspace: action.payload.workspace, showWorkspaces: false,
-        showChannels: true, channelsList: action.payload.workspace.channels, currentChannel: action.payload.workspace.channels[0] });
+        showChannels: true, channelsList: action.payload.workspace.channels, error:'', currentChannel: action.payload.workspace.channels[0] });
 }
 
 function showWorkspaces(currentState: WorkspaceState, action: AnyAction) {
     return Object.assign({}, currentState, {workspaces: currentState.workspaces, currentWorkspace:undefined, showWorkspaces: true,
-        showChannels: false, channelsList: undefined, currentChannel: undefined});
+        showChannels: false, channelsList: undefined, currentChannel: undefined, error:''});
 }
 
 function createWorkspaceReducer(currentState: WorkspaceState , action: AnyAction) {
     const oldWorkspaces = currentState.workspaces || [];
     const newWorkspace = Object.assign({}, action.payload.workspace);
     const newWorkspaces = [...oldWorkspaces, newWorkspace];
-    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace});
+    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, error:''});
 }
 
 function editWorkspaceReducer(currentState: WorkspaceState , action: AnyAction) {
+    if(action.payload.name === '') {
+        return Object.assign({}, currentState, {error: "Enter Workspace Name"});
+    }
     const oldWorkspaces = currentState.workspaces || [];
     const oldWorkspace = oldWorkspaces.filter(i => i.id === action.payload.id)[0];
     const newWorkspace = Object.assign({}, oldWorkspace, {name: action.payload.name});
     const newWorkspaces = oldWorkspaces.map(i => i.id === action.payload.id ? newWorkspace : i);
-    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace});
+    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, error:''});
 }
 
 function removeWorksapceReducer(currentState: WorkspaceState , action: AnyAction) {
     const oldWorkspaces = currentState.workspaces || [];
     const newWorkspaces = oldWorkspaces.filter(i => i.id !== action.payload.wid);
-    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: undefined});
+    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: undefined, error:''});
 }
 
 function addUserWorkspaceReducer(currentState: WorkspaceState , action: AnyAction) {
@@ -117,7 +120,7 @@ function addUserWorkspaceReducer(currentState: WorkspaceState , action: AnyActio
        
         const newWorkspace = Object.assign({}, oldWorkspace, {users: newUsers});
         const newWorkspaces = oldWorkspaces.map(i => i.id === action.payload.wid ? newWorkspace : i);
-        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace});
+        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, error:''});
     }else{
         return currentState;
     }
@@ -126,13 +129,16 @@ function addUserWorkspaceReducer(currentState: WorkspaceState , action: AnyActio
 
 function addChannelReducer(currentState: WorkspaceState , action: AnyAction) {
    if(currentState.currentWorkspace && currentState.workspaces) {
+       if(action.payload.channel.name === ''){
+           return Object.assign({}, currentState, {error: 'Enter channel name'});
+       }
     const oldWorkspace = currentState.currentWorkspace;
     const oldChannels = oldWorkspace.channels;
     const newChannels = [...oldChannels, action.payload.channel];
    
     const newWorkspace = Object.assign({}, oldWorkspace, {channels: newChannels});
     const newWorkspaces = currentState.workspaces.map(i => i.id === oldWorkspace.id ? newWorkspace : i);
-    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentChannel: action.payload.channel ,currentWorkspace: newWorkspace, channelsList: newChannels});
+    return Object.assign({}, currentState, {workspaces: newWorkspaces, currentChannel: action.payload.channel ,currentWorkspace: newWorkspace, channelsList: newChannels, error:''});
     }else{
         return currentState;
     }
@@ -141,6 +147,9 @@ function addChannelReducer(currentState: WorkspaceState , action: AnyAction) {
 
  function submitMessageReducer(currentState: WorkspaceState , action: AnyAction) {
     if(currentState.currentChannel && currentState.currentWorkspace && currentState.workspaces){
+        if(action.payload.message.message === ''){
+             return Object.assign({}, currentState, {error:'Enter Message'});
+        }
         const oldWorkspace = currentState.currentWorkspace;
         const newChannelMessages = [...currentState.currentChannel.messages, action.payload.message];
         const newChannel = {...currentState.currentChannel, messages: newChannelMessages};
@@ -148,7 +157,7 @@ function addChannelReducer(currentState: WorkspaceState , action: AnyAction) {
        
         const newWorkspace = Object.assign({}, oldWorkspace, {channels: newChannels});
         const newWorkspaces = currentState.workspaces.map(i => i.id === oldWorkspace.id ? newWorkspace : i);
-        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels});
+        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels, error:''});
    
     } else{
         return currentState;

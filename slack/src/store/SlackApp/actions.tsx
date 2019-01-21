@@ -9,7 +9,7 @@ export const addUserWorkspaceAction = (wid: string, user: UserData) => action(Sl
 
 export const addChannelAction = (channel: ChannelData) => action(SlackActionTypes.ADD_CHANNEL, {channel});
 
-export const submitMessageAction = (cid: string, message: string) => action(SlackActionTypes.SUBMIT_MESSAGE, {cid, message});
+export const submitMessageAction = (cid: string, message: MessageData) => action(SlackActionTypes.SUBMIT_MESSAGE, {cid, message});
 export const showWorkspacesAction = () => action(SlackActionTypes.SHOW_WORKSPACES);
 export const setChannelAction = (channel: ChannelData) => action(SlackActionTypes.SET_CHANNEL, {channel});
 

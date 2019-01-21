@@ -43,5 +43,6 @@ export interface WorkspaceState{
     showWorkspaces?: boolean,
     channelsList?: ChannelData[],
     currentChannel?: ChannelData,
-    showChannels?: boolean
+    showChannels?: boolean,
+    error?: string
 }
