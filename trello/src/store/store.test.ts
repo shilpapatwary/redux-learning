@@ -5,7 +5,7 @@ import {ListData} from './TrelloApp/types';
 chai.should();
 describe('Trello Application store', function() {
   describe('store.dispatch(addBoardAction(""))', function() {
-    it('should add a bboard ', function() {
+    it('should add a board ', function() {
       const oldBoards = store.getState().boards || {}
       oldBoards.should.be.of.length(5);
       store.dispatch(addBoardAction({
@@ -21,6 +21,8 @@ describe('Trello Application store', function() {
 
   describe('store.dispatch(editBoardAction(""))', function() {
     it('should edit board name', function() {
+      store.dispatch(editBoardAction("", "5bdaeff0bee9dc6b70afed0d"));
+      store.getState().should.have.property('error').and.equals('Enter Board Name');
       store.dispatch(editBoardAction("updated Board", "5bdaeff0bee9dc6b70afed0d"));
       const selectedBoard =  store.getState().selectedBoard || {};
       selectedBoard.should.have.property('name').and.equal('updated Board');

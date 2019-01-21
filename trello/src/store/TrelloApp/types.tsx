@@ -33,5 +33,6 @@ export interface BoardState{
     boards?: BoardData[],
     selectedBoard?: BoardData,
     showBoards?: boolean,
-    showLists?: boolean
+    showLists?: boolean,
+    error?: string
 }

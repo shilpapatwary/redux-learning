@@ -41,33 +41,36 @@ const TodoApplicationReducer: Reducer<BoardState> = (currentState: BoardState = 
 
 function setBoardReducer(currentState: BoardState, action: AnyAction) {
     return Object.assign({}, currentState, {boards: currentState.boards, selectedBoard: action.payload.board, showBoards: false,
-        showLists: true});
+        showLists: true, error:''});
 }
 
 function setCurrentViewReducer(currentState: BoardState, action: AnyAction) {
     return Object.assign({}, currentState, {boards: currentState.boards, selectedBoard: currentState.selectedBoard, showBoards: action.payload.showBoards,
-        showLists: action.payload.showLists});
+        showLists: action.payload.showLists, error:''});
 }
 
 function addBoardReducer(currentState: BoardState , action: AnyAction) {
     const oldBoards = currentState.boards || [];
     const newBoard = Object.assign({}, action.payload.board);
     const newBoards = [...oldBoards, newBoard];
-    return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newBoard});
+    return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newBoard, error:''});
 }
 
 function editBoardReducer(currentState: BoardState , action: AnyAction) {
+    if(action.payload.name === '') {
+        return Object.assign({}, currentState, {error:'Enter Board Name'});
+    }
     const oldBoards = currentState.boards || [];
     const oldBoard = oldBoards.filter(i => i.id === action.payload.id)[0];
     const newBoard = {...oldBoard, name: action.payload.name};
     const newBoards = oldBoards.map(i => i.id === action.payload.id ? newBoard : i);
-    return Object.assign({}, currentState, {boards: newBoards, selectedBoard:newBoard});
+    return Object.assign({}, currentState, {boards: newBoards, selectedBoard:newBoard, error:''});
 }
 
 function removeBoardReducer(currentState: BoardState , action: AnyAction) {
     const oldBoards = currentState.boards || [];
     const newBoards = oldBoards.filter(i => i.id !== action.payload.boardId);
-    return Object.assign({}, currentState, {boards: newBoards, selectedBoard: undefined});
+    return Object.assign({}, currentState, {boards: newBoards, selectedBoard: undefined, error:''});
 }
 
 function addListReducer(currentState: BoardState , action: AnyAction) {
@@ -79,7 +82,7 @@ function addListReducer(currentState: BoardState , action: AnyAction) {
     
     const newCurrentBoard = Object.assign({}, oldCurrentBoard, {lists: newLists});
     const newBoards = oldBoards.map(i => i.id === oldCurrentBoard.id ? newCurrentBoard : i);
-    return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard});
+    return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard, error:''});
 }
 
 function editListReducer(currentState: BoardState , action: AnyAction) {
@@ -90,7 +93,7 @@ function editListReducer(currentState: BoardState , action: AnyAction) {
         
         const newBoards = currentState.boards.map(i => i.id === boardId ? {...currentState.selectedBoard, lists: updatedLists} : i);
         const newCurrentBoard = {...currentState.selectedBoard, lists: updatedLists};
-        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard});
+        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard, error:''});
     }else {
         return currentState;
     }
@@ -106,7 +109,7 @@ function addCardReducer(currentState: BoardState , action: AnyAction) {
 
         const newBoards = currentState.boards.map(i => i.id === boardId ? {...currentState.selectedBoard, lists: newLists} : i);
         const newCurrentBoard = {...currentState.selectedBoard, lists: newLists};
-        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard});
+        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard, error:''});
     }else{
         return currentState;
     }
@@ -120,7 +123,7 @@ function editCardReducer(currentState: BoardState , action: AnyAction) {
 
         const newBoards = currentState.boards.map(i => i.id === boardId ? {...currentState.selectedBoard, lists: newLists} : i);
         const newCurrentBoard = {...currentState.selectedBoard, lists: newLists};
-        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard});
+        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard, error:''});
     }else {
         return currentState;
     }
@@ -143,7 +146,7 @@ function moveListReducer(currentState: BoardState , action: AnyAction) {
  
         const newBoards = currentState.boards.map(i => i.id === boardId ? {...currentState.selectedBoard, lists: newListsWithUpdatedIndex} : i);
         const newCurrentBoard = {...currentState.selectedBoard, lists: newListsWithUpdatedIndex};
-        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard});
+        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard, error:''});
     }else {
         return currentState;
     }
@@ -165,7 +168,7 @@ function moveCardReducer(currentState: BoardState , action: AnyAction) {
 
         const newBoards = currentState.boards.map(i => i.id === boardId ? {...currentState.selectedBoard, lists: newLists} : i);
         const newCurrentBoard = {...currentState.selectedBoard, lists: newLists};
-        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard});
+        return Object.assign({}, currentState, {boards: newBoards, selectedBoard: newCurrentBoard, error:''});
     }else {
         return currentState;
     }
