@@ -12,3 +12,6 @@ export const addChannelAction = (channel: ChannelData) => action(SlackActionType
 export const submitMessageAction = (cid: string, message: string) => action(SlackActionTypes.SUBMIT_MESSAGE, {cid, message});
 export const showWorkspacesAction = () => action(SlackActionTypes.SHOW_WORKSPACES);
 export const setChannelAction = (channel: ChannelData) => action(SlackActionTypes.SET_CHANNEL, {channel});
+
+export const editMessageAction = (cid: string, mid: string, message: string) => action(SlackActionTypes.EDIT_MESSAGE, {cid, mid, message});
+export const deleteMessageAction = (cid: string, mid: string) => action(SlackActionTypes.DELETE_MESSAGE, {cid, mid});

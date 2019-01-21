@@ -10,10 +10,13 @@ export enum SlackActionTypes {
     LIST_USERS = "@@slackApp/LIST_USERS",
     SUBMIT_MESSAGE = "@@slackApp/SUBMIT_MESSAGE",
     SHOW_WORKSPACES = "@@slackApp/SHOW_WORKSPACES",
-    SET_CHANNEL = "@@slackApp/SET_CHANNEL"
+    SET_CHANNEL = "@@slackApp/SET_CHANNEL",
+    DELETE_MESSAGE = "@@slackApp/DELETE_MESSAGE",
+    EDIT_MESSAGE = "@@slackApp/EDIT_MESSAGE"
 }
 export interface MessageData{
         message: string,
+        id: string
 }
 export interface UserData {
         id: string,

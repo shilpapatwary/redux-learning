@@ -43,6 +43,8 @@ class Home extends Component<HomeProps, HomeState> {
     this.deleteWorkspace = this.deleteWorkspace.bind(this);
     this.addUserToWorkspace = this.addUserToWorkspace.bind(this);
     this.setCurrentChannel = this.setCurrentChannel.bind(this);
+    this.editMessage = this.editMessage.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
   }
 
   showWorkspaceContainer() {
@@ -81,6 +83,14 @@ class Home extends Component<HomeProps, HomeState> {
     store.dispatch({type: SlackActionTypes.ADD_USER_WORKSPACE, payload:{wid, user}});
   }
 
+  editMessage(cid: string, mid: string, message: string){
+    store.dispatch({type: SlackActionTypes.EDIT_MESSAGE, payload:{cid, mid, message}});
+  }
+
+  deleteMessage(cid: string, mid: string) {
+    store.dispatch({type: SlackActionTypes.DELETE_MESSAGE, payload: {cid, mid}});
+  }
+
   render() {
     return (
     <div>
@@ -91,7 +101,9 @@ class Home extends Component<HomeProps, HomeState> {
         {this.state.currentWorkspace &&this.state.showChannels && this.state.channels && this.state.currentChannel && <ChannelCointainer channels={this.state.channels} 
         users={this.state.currentWorkspace.users} showWorkspaceContainer={this.showWorkspaceContainer} 
         onAddChannel={this.addChannelToWorkspace}
-        onMessageSent={this.saveMessages} currentChannel={this.state.currentChannel} setCurrentChannel={this.setCurrentChannel}></ChannelCointainer>}
+        onMessageSent={this.saveMessages} currentChannel={this.state.currentChannel} setCurrentChannel={this.setCurrentChannel}
+        editMessage={this.editMessage} deleteMessage={this.deleteMessage}
+        ></ChannelCointainer>}
       </section>
     </div>
     );

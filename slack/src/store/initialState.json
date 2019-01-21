@@ -21,7 +21,7 @@
                         "id" :"user1",
                         "name" : "Shilpa"
                     }],
-                    "messages":["hi", "hello"]
+                    "messages":[{"message":"hi", "id": "545343"}, {"message":"hello", "id": "545390"}]
                 },
                 {
                     "id" : "gtyje786564",

@@ -4,7 +4,9 @@ import {ChannelData} from '../store/SlackApp/types';
 
 interface MessageContainerProps{
   selectedChannel: ChannelData,
-  saveMessages: any
+  saveMessages: any,
+  editMessage: any,
+  deleteMessage: any
 }
 interface MessageContainerState{
   selectedChannel: ChannelData
@@ -21,7 +23,7 @@ class MessageContainer extends Component<MessageContainerProps, MessageContainer
     return (
     <div className="messageSection" id="msgSec">
         <h2 className='channelHeaderName'>{this.state.selectedChannel.name}</h2>
-        <MessagesHistory channel={this.state.selectedChannel} key={this.state.selectedChannel.id} saveMessages={this.props.saveMessages}></MessagesHistory>
+        <MessagesHistory channel={this.state.selectedChannel} key={this.state.selectedChannel.id} editMessage={this.props.editMessage} deleteMessage={this.props.deleteMessage} saveMessages={this.props.saveMessages}></MessagesHistory>
      </div>
     );
   }

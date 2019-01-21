@@ -23,7 +23,9 @@ constructor(props: SendMessageProps){
 submitMessage(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.preventDefault();
     const elem = document.getElementById(`message${this.state.channel.id}`) as HTMLInputElement;
-    this.props.submitMessage( elem.value) ;
+    this.props.submitMessage( {
+        message: elem.value,
+        id: Math.floor(Math.random()*100000)});
     this.setState({inputText:''});
 }
 

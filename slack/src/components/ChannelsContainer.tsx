@@ -12,7 +12,9 @@ interface ChannelContainerProps{
     onAddChannel: any,
     onMessageSent: any,
     currentChannel: ChannelData,
-    setCurrentChannel: any
+    setCurrentChannel: any,
+    editMessage: any,
+    deleteMessage: any
 }
 interface  ChannelContainerState {
     channels: ChannelData[],
@@ -57,7 +59,6 @@ class channelsContainer extends Component <ChannelContainerProps, ChannelContain
      this.setState({ showChannelForm: true,
         showMessageSection: false})
  }
-
  
  openUserForm() {
     this.setState({ showChannelForm: false,
@@ -102,7 +103,7 @@ class channelsContainer extends Component <ChannelContainerProps, ChannelContain
                 </div>
                {
                    this.state.showMessageSection && this.state.hasChannels &&
-                  <MessageContainer key={this.state.selectedChannel.id} selectedChannel={this.state.selectedChannel} saveMessages={this.props.onMessageSent}></MessageContainer>
+                  <MessageContainer key={this.state.selectedChannel.id} selectedChannel={this.state.selectedChannel} saveMessages={this.props.onMessageSent} editMessage={this.props.editMessage} deleteMessage={this.props.deleteMessage}></MessageContainer>
                } 
                 
             {

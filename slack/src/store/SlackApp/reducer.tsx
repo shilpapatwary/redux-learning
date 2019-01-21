@@ -1,6 +1,7 @@
 import { WorkspaceState, SlackActionTypes } from "./types";
 import { AnyAction } from 'redux';
 import { Reducer } from 'redux';
+import { deleteMessageAction } from "./actions";
 
 const initialState: WorkspaceState = {
     workspaces: undefined,
@@ -31,9 +32,45 @@ const SlackApplicationReducer: Reducer<WorkspaceState> = (currentState: Workspac
             return setChannelReducer(currentState, action);
          case SlackActionTypes.SUBMIT_MESSAGE:
               return submitMessageReducer(currentState, action);
+        case SlackActionTypes.EDIT_MESSAGE:
+            return editMessageReducer(currentState, action);
+        case SlackActionTypes.DELETE_MESSAGE:
+            return deleteMessageReducer(currentState, action);
         default:
             return currentState;
         
+    }
+}
+
+function editMessageReducer(currentState: WorkspaceState, action: AnyAction) {
+    if(currentState.currentChannel && currentState.currentWorkspace && currentState.workspaces){
+        const oldWorkspace = currentState.currentWorkspace;
+        const newChannelMessages = currentState.currentChannel.messages.map(m => m.id === action.payload.mid ? {...m, message: action.payload.message} : m );
+        const newChannel = {...currentState.currentChannel, messages: newChannelMessages};
+        const newChannels = currentState.currentWorkspace.channels.map(c => c.id === action.payload.cid ? {...c, messages: newChannelMessages} : c);
+       
+        const newWorkspace = Object.assign({}, oldWorkspace, {channels: newChannels});
+        const newWorkspaces = currentState.workspaces.map(i => i.id === oldWorkspace.id ? newWorkspace : i);
+        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels});
+   
+    } else{
+        return currentState;
+    }
+}
+
+function deleteMessageReducer(currentState: WorkspaceState, action: AnyAction) {
+    if(currentState.currentChannel && currentState.currentWorkspace && currentState.workspaces){
+        const oldWorkspace = currentState.currentWorkspace;
+        const newChannelMessages = currentState.currentChannel.messages.filter(m => m.id !== action.payload.mid);
+        const newChannel = {...currentState.currentChannel, messages: newChannelMessages};
+        const newChannels = currentState.currentWorkspace.channels.map(c => c.id === action.payload.cid ? {...c, messages: newChannelMessages} : c);
+       
+        const newWorkspace = Object.assign({}, oldWorkspace, {channels: newChannels});
+        const newWorkspaces = currentState.workspaces.map(i => i.id === oldWorkspace.id ? newWorkspace : i);
+        return Object.assign({}, currentState, {workspaces: newWorkspaces, currentWorkspace: newWorkspace, currentChannel: newChannel, channelsList: newChannels});
+   
+    } else{
+        return currentState;
     }
 }
 

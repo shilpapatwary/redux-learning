@@ -5,7 +5,9 @@ import { ChannelData, MessageData } from '../store/SlackApp/types';
 
 interface MessageHistoryProps{
     channel: ChannelData,
-    saveMessages: any
+    saveMessages: any,
+    editMessage: any,
+    deleteMessage: any
 }
 interface MessageHistoryState{
     channel: ChannelData,
@@ -19,10 +21,20 @@ constructor(props: MessageHistoryProps){
         messages: props.channel.messages
     };
     this.submitMessage = this.submitMessage.bind(this);
+    this.editMessage  = this.editMessage.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
 }
 
 submitMessage(message: MessageData) {
     this.props.saveMessages(this.state.channel.id, message);
+}
+
+editMessage(mid:string, message: string) {
+    this.props.editMessage(this.state.channel.id, mid, message);
+}
+
+deleteMessage(mid: string){
+    this.props.deleteMessage(this.state.channel.id, mid);
 }
 
   render() {
@@ -32,7 +44,7 @@ submitMessage(message: MessageData) {
             {
                 
                   this.state.messages.map( (message, index) => {
-                    return <Message key={index} message={message}></Message>
+                    return <Message key={index} message={message} editMessage={this.editMessage} deleteMessage={this.deleteMessage}></Message>
                     })
                     
             }

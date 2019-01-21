@@ -267,3 +267,17 @@ color: #ffffff;
     line-height: 50px;
     padding-left:11px;
 }
+
+.message{
+    display: flex;
+    justify-content: space-between;
+}
+.message i{
+    padding: 10px;
+    cursor:pointer;
+    colo: grey;
+}
+
+.messageText:disabled{
+    border:0;
+}
